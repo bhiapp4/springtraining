@@ -1,0 +1,27 @@
+Dependency inversion/Dependency Injection/Inversion of control
+//A class has dependency on class b, class c
+//it creates an object of class b, c inside of class A
+//it says to class A tell me what is the dependecies for u to work
+//spring framework will create all the dependencies required for Class A
+//by using design patterns we can achieve dependency inversion
+//Factory design pattern
+//spring performs dependency injection for us
+//DI types
+//setter based dependency injection
+//constructor based dependency injection
+//Types of app context
+//ClassPathXMLApplicationContext - bootstraps spring from project classpath xml files
+//FileSystemXMLApplicationContext - loads the app context from File system
+//XMLWebApplicationContext - its used for webapplications(MVC, Security,Webflow etc..)
+--Spring Modules
+Core Container(DI), 
+Data Access/Integration(JDBC, Hibernate, JPA, transactions), 
+Web - MVC, Webflow, Security(MVC), 
+AOP (Aspect Oriented Programming), 
+Instrumentation, 
+Messaging(JMS, Webservices..), 
+and Test(Test spring beans(Junit))
+//Bean Factory - lightweight spring container
+//BeanFactory vs ApplicationContext
+BeanFactory does a post instatiation of the beans(it instantiates the beans during request time)
+AppContext instatiates the beans during spring container startup
