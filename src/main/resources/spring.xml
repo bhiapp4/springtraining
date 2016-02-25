@@ -22,7 +22,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 		
 	<!-- hey spring you have to manage the below beans and take care of instantiation for me -->
- 	<bean class="org.jnit.loosecoupling.Circle" id="circle"/>
+ 	<bean class="org.jnit.loosecoupling.Circle" id="circle" scope="prototype"/>
  	<bean class="org.jnit.loosecoupling.Triangle" id="triangle"/>
  	<bean class="org.jnit.loosecoupling.Rectangle" id="rectangle"/>
 	<!-- ref here refers an existing spring bean -->

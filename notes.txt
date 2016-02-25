@@ -25,3 +25,52 @@ and Test(Test spring beans(Junit))
 //BeanFactory vs ApplicationContext
 BeanFactory does a post instatiation of the beans(it instantiates the beans during request time)
 AppContext instatiates the beans during spring container startup
+- Appcontext provides us AOP,messaging, internolization etc..
+
+--Spring bean scopes
+ - singleton scope (only one single instance per given bean in a container)
+ - prototype scope( creates a new instance for every request)
+ --web purposes
+  -Request - creates a new isntance per HttpRequest
+  -Session - creates a new instance for every HttpSession
+  -GlobalSession - portal and portlet application
+ 
+ 
+--defining spring beans with annotations
+-- Pure XML based configuration
+- XML plus annotations
+ -@Component(any class as spring managed bean), @Service(service classes), @Repository(DAO classes)
+ -@Controller and @RestController(MVC purposes)
+
+--bean auto wiring - performing dependency injection without using constructor or setter based DI
+--autowiring beans in xml - no(explicity specify the dependencies), name, type, constructor
+--autowired annotation
+--qualifier annotation usage - bean conflicts
+--defining constants
+--defining datastructures
+--bean aliasing
+--reading property files
+--importing resources
+--spring Lazy init
+--inheriting beans using spring
+
+
+--spring lookup method DI
+--spring bean lifecycle
+- Complete Annotation approach(Java based configuration)
+--Java based configuration
+--Spring JDBC and Transaction management
+--Spring JDBC, Hibernate and Transaction management
+--spring AOP
+--Spring MVC
+
+Spring 4 new changes
+
+- new annotations(@Lazy, @Lookup, @RestController, @ActiveProfiles(), @Conditional(conditionally filtering beans), @Profile,, @Order, @Description)
+-Java 8 support
+-Spring now treats generic types as a form of qualifer(Repository<CustomerRespository>customerRepository)
+-test improvements like support for servlet 3 and creating Mock HttpRequest and responses
+-Java EE 7 support
+-Support for JMS 2 and JPA 2.1
+-AsyncRestTemplate has been added to support non blocking requests for rest clients
+-Spring MVC has comprehensive timezone support
