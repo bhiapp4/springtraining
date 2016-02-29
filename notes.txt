@@ -54,13 +54,13 @@ AppContext instatiates the beans during spring container startup
 --spring Lazy init
 --inheriting beans using spring
 
+Session - 28
 
 --spring lookup method DI
 --spring bean lifecycle
-- Complete Annotation approach(Java based configuration)
---Java based configuration
---Spring JDBC and Transaction management
---Spring JDBC, Hibernate and Transaction management
+- Java based configuration or Complete Annotation approach(Java based configuration)
+-- Spring Data(JDBC, JPA, Hibernate...)
+--Spring Transaction management
 --spring AOP
 --Spring MVC
 
