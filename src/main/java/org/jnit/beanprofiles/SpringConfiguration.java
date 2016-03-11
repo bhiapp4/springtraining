@@ -1,38 +1,32 @@
-package org.jnit.spring.javaconfiguration;
+package org.jnit.beanprofiles;
 
 import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.jnit.spring.javaconfiguration.Circlular;
+import org.jnit.spring.javaconfiguration.Rectangle;
+import org.jnit.spring.javaconfiguration.ShapeCreator;
+import org.jnit.spring.javaconfiguration.Triangle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages={"org.jnit.spring.javaconfiguration"})
-//@PropertySource("classpath:app.properies")
-@PropertySources({@PropertySource("classpath:app.properies"), @PropertySource("classpath:connection.properties")})
-@EnableTransactionManagement
-@EnableAspectJAutoProxy
 public class SpringConfiguration {
  
 	public static List<String>COUNTRIES = Arrays.asList("NY","NJ");
-	
-	@Autowired
-	private Environment env;
-	
+		
 	@Bean(name="circle")
 	@Scope(value="singleton")
 	public Circlular getCircle(){
@@ -51,7 +45,6 @@ public class SpringConfiguration {
 	
 	@Bean
 	public ShapeCreator getShapeCreator(){
-		System.out.println(env.getProperty("appName"));
 		return new ShapeCreator(getTraingle());
 	}	
 	
@@ -62,13 +55,17 @@ public class SpringConfiguration {
 	}
 	
 	@Bean
+	@Profile("dev")
 	public DataSource getDataSource(){
-		DriverManagerDataSource datasource = new DriverManagerDataSource(env.getProperty("database.url"), env.getProperty("database.username"), null);
+		DriverManagerDataSource datasource = new DriverManagerDataSource("jdbc:mysql://localhost:3306/javatraining", "root", null);
 		return datasource;
 	}
 	
 	@Bean
-	public PlatformTransactionManager getTransactionManager(){
-		return new HibernateTransactionManager();
+	@Profile("prod")
+	public DataSource getDataSourceProd(){
+		DriverManagerDataSource datasource = new DriverManagerDataSource("jdbc:mysql://produrl:3306/javatraining", "prodUserName", "prodPassword");
+		return datasource;
 	}
+
 }

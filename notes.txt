@@ -59,10 +59,124 @@ Session - 28
 --spring lookup method DI
 --spring bean lifecycle
 - Java based configuration or Complete Annotation approach(Java based configuration)
--- Spring Data(JDBC, JPA, Hibernate...)
---Spring Transaction management
---spring AOP
---Spring MVC
+-Spring Data
+--JDBC,JPA 
+
+Session - 29
+
+- Spring bean profiles - System.setProperty("spring.profiles.active", "dev");appContext.getEnvironment().setActiveProfiles("dev");
+- Spring MVC 
+- JSP's for views
+- Jquery and Javascript for any thing we want to do on the client side
+- Hibernate for ORM,
+- Will add Spring Transaction management
+
+ - ACID properties
+ Atomic - All or nothing
+ Consistent - db constraints never violated
+ Isolation - how transactions see work done by others
+ Durable - committed changes are permanent
+ -Transaction management types
+-- declarative transaction management - container managed transactions (spring makes use of AOP(around(before+after) advice) to create the transactional context for your target method)
+  --@Transactional annotation(on class level(all method in ur class will run inside a transaction) /method level(only that method will run in a transactional context))
+  --define transaction manager(different types of transaction manager)
+  -- @EnableTransactionManagement, define transaction manager bean
+  -- tx-annoation-driven element and transaction manager inside xml
+  
+-- programmatic transaction management - user managed transactions
+ -- Transactional Template
+ -- PlatformTransactionManager
+
+ -isolation levels
+  - Default - we are going with the isolation level defined by DBA
+  - Read uncommitted - we always read uncommitted data..
+  - Read Committed - This is the commonly used one
+  - Repeatable reads - we perform multiple reads on a given transaction and is guaranteed to return the same data..(row level lock)
+  - Serializable - sequential access, least preference, table level lock
+ 
+ - dirty reads - (read uncommitted data which the transaction might commit or roll back)
+ - phantom reads - (reads which will happen when we execute a query and there is a resultset that is being returned, and there is a new row added based on the criteria used in the query)
+ - repetable/non-repetable reads = when u perform a non repeatable reads we get different data based on transaction commit or roll back status
+ 
+ -propogation levels
+ - Required -> txalreadyexists -> continue with the transaction, txdoesntexist - create a new transaction
+ - RequiresNew -> txalreadyexists -> existing transaction is suspended and a new transaction is created, once the method is finished, ur outer transaction is resumed ,txdoesntexist-> creates a new one
+ - Never ->txalreadyexists -> throws TransactionNotSupportedException, txdoesntexist-> well and good no issues
+ - Supported(read only operations) ->txalreadyexists -> it will just run, txdoesntexist-> no issues,it will just run
+ - Not Supported -txalreadyexists -> suspends the current transaction and the method will run, txdoesntexist->  it will just run
+ - NESTED
+ 
+- Will add spring AOP (Aspect oriented programming)
+--address cross cutting concerns(log, transactions, exceptions..)
+-aspectj framework allows us to define join points at various locations in a given class(constructors, methods, classes etc..)
+ - Joinpoint - Method level join points (where actually we can apply an aspect(method level, class level, constructor level))
+ - Pointcut - set of one or more join points where an advice can be applied
+ - Aspect - defines the advice that needs to be applied
+ - Advice - (before, after, around(before plus after), after throwing and after returning)
+ - Weaving -(Compile time weaving and Run time weaving(spring used run time weaving))
+
+---Spring security
+-LDAP(people, roles), Active directory, DB,SSL
+-Authentication(user-password(who can access ?)) vs Authorization(what he/she can access(resource level permissions))
+-Integrating spring security in our application
+-Performing single user authentication
+-Performing Multi user DB authentication(where user and roles come from DB)
+-Customizing authentication with our own login page and login controller
+-Using Spring security tags to control access to resources based on roles
+-Method level spring security
+-Using encryption for passwords stored in db and configuring spring to use it(MD5 and bcrypt)
+-Using Spring with LDAP authentication
+-Making our app use https(SSL authentication(certificates(self signed certificate , certificate providers)))
+
+----Self signed certificate steps
+C:\Users\Appi\servers\apache-tomcat-8.0.30\bin>keytool -genkey -alias tomcat8 -k
+eyalg RSA -keystore tomcat8
+Enter keystore password://changeit is the default password
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:
+What is the name of your organizational unit?
+  [Unknown]:
+What is the name of your organization?
+  [Unknown]:
+What is the name of your City or Locality?
+  [Unknown]:  Lewisville
+What is the name of your State or Province?
+  [Unknown]:  TX
+What is the two-letter country code for this unit?
+  [Unknown]:  US
+Is CN=Unknown, OU=Unknown, O=Unknown, L=Lewisville, ST=TX, C=US correct?
+  [no]:  yes
+
+Enter key password for <tomcat8>
+        (RETURN if same as keystore password):
+
+-----------
+Tomcat server.xml config
+
+    <Connector port="28443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" keystoreFile="C:\Users\Appi\servers\apache-tomcat-8.0.30\bin\tomcat8" keystorepassword="changeit"/>
+
+
+----------------
+
+---Rest based web services (Jersey - JAX-RS)
+-Introduction to web services
+-REST architecture
+-JSON/XML
+-CRUD functions
+ - resource mapping (Path params, query params, matrix params, form-params, form-url-encoded)
+ - sub resource mapping
+ - default values
+ -Bean validtion
+-HTTP codes
+-Error handling
+  - defining exception mappers
+-Filters
+-Interceptors
+-Client code
+-Spring REST
 
 Spring 4 new changes
 
