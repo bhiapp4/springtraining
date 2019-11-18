@@ -1,5 +1,7 @@
 This is bala 
 Dependency inversion/Dependency Injection/Inversion of control
+I added these lines now 
+
 //A class has dependency on class b, class c
 //it creates an object of class b, c inside of class A
 //it says to class A tell me what is the dependecies for u to work
