@@ -1,7 +1,5 @@
 This is bala 
-I added these line to git hub today
-how to commit these code to online 
-Fuck this git very hard to understand 
+I added these
 
 Dependency inversion/Dependency Injection/Inversion of control
 //A class has dependency on class b, class c
