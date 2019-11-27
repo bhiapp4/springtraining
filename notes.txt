@@ -1,3 +1,6 @@
+This is bala 
+I added these
+
 Dependency inversion/Dependency Injection/Inversion of control
 //A class has dependency on class b, class c
 //it creates an object of class b, c inside of class A
